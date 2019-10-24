@@ -14,19 +14,20 @@
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } else {
-      echo "<p>Connect Successfully</p>";
-    }
+    // // Check connection
+    // if ($conn->connect_error) {
+    //     die("Connection failed: " . $conn->connect_error);
+    // } else {
+    //   echo "<p>Connect Successfully</p>";
+    // }
 
-    $sql = "INSERT INTO Users (user_id) VALUES (" .$_POST['username']. ")";
+    $input = $_POST['username'];
+    $sql = "INSERT INTO Users (user_id) VALUES ('$input')";
 
     if ($conn->query($sql) === TRUE) {
         echo "<p>Add " .$_POST['username']. " successfully</p>";
     } else {
-        echo "<p>Error: " . $sql . "<br>" . $conn->error. "</p>";
+        echo "<p>Error: " . $conn->error. "</p>";
     }
 
     $conn->close();
