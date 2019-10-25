@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>View User Posts.html</h1>
+
+    <form action="ViewUserPosts.php" method="POST">
+      <?php
+        $servername = "mysql.eecs.ku.edu";
+        $username = "karenws";
+        $password = "Eeb3eith";
+        $dbname = "karenws";
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "SELECT * FROM Users";
+        $result = $conn->query($sql);
+        echo "<label>User: </label>";
+        echo "<select name='dropdown'>";
+        while($row = $result->fetch_array()){
+          $temp = $row['user_id'];
+          echo "<option value='$temp' >" .$temp. "</option>";
+        }
+        echo "</select>";
+      ?>
+      <input type="submit" value="Search The User Post">
+    </form>
+
+
+  </body>
+</html>
