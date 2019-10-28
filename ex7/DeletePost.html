@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>DeletePost.html</h1>
+    <form class="" action="DeletePost.php" method="POST">
+      <table class='centerContent' border= \'1\' style='border-collapse: collapse'>
+        <thead>
+
+        </thead>
+        <tbody>
+          <?php
+          $servername = "mysql.eecs.ku.edu";
+          $username = "karenws";
+          $password = "Eeb3eith";
+          $dbname = "karenws";
+          $conn = new mysqli($servername, $username, $password, $dbname);
+
+          $sql = "SELECT * FROM Posts";
+          $result = $conn->query($sql);
+          echo "<table class='centerContent' border= \'1\' style='border-collapse: collapse'>";
+          if ($result->num_rows > 0){
+            echo "<td><strong>Posts</strong></td>";
+            echo "<td><strong>Authors</strong></td>";
+            echo "<td><strong>Delete?</strong></td>";
+            while ($row = $result->fetch_assoc()){
+              echo "<tr>";
+              echo "<td>" .$row['content'].  "</td>";
+              echo "<td>" .$row['author_id'].  "</td>";
+              $tempid = $row['post_id'];
+              echo "<td><input type='checkbox' name='check[]' value='" .$tempid. "' ></td>";
+              echo "</tr>";
+            }
+          } else {
+            echo "<tr><td> No data found </td></tr>";
+          }
+          echo "</table>";
+          ?>
+        </tbody>
+        </table>
+        <input type='submit' name='Delete' value='Delete'>
+
+    </form>
+
+
+  </body>
+</html>
